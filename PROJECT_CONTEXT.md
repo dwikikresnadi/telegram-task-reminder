@@ -70,7 +70,7 @@ launchctl load ~/Library/LaunchAgents/com.user.wamacreminder.popup.plist
 - **Mac asleep at 8 AM**: popup fires within 5 min of wake-up
 - **Mac fully off**: on restart, listener catches up missed commands from last 50 self-messages (silent, no reply spam)
 - **Junk messages filtered**: only valid commands are processed, random self-messages ignored
-- **Session persistence**: WhatsApp session saved in `.wwebjs_auth/` — no re-scan after first QR
+- **Session persistence**: Telegram polling handles reconnection automatically — no token re-entry needed
 
 ## Git Setup
 All code is in Git. Sensitive data is excluded via `.gitignore`.
@@ -109,9 +109,12 @@ launchctl load ~/Library/LaunchAgents/com.user.wamacreminder.popup.plist
 | 2026-06-27 | `index.js` — Chrome SingletonLock cleanup on startup to prevent crash-loop on restart |
 | 2026-06-27 | Popup emoji fix — switched from env var to temp `.applescript` file to preserve UTF-8 encoding |
 | 2026-06-27 | Sleep/wake fix — `disconnected` handler now calls `client.destroy()` + `process.exit(1)` so launchd restarts cleanly; Chrome processes killed on startup (`pkill`) not just lock files; `protocolTimeout` raised to 120s; `unhandledRejection` handler added to catch ProtocolError timeouts |
+| 2026-06-27 | Migrated from WhatsApp to Telegram — replaced whatsapp-web.js + Puppeteer/Chrome with node-telegram-bot-api; bot replies now appear as incoming messages (left bubble); no Chrome, no QR scan |
+| 2026-06-27 | Pushed to GitHub — https://github.com/dwikikresnadi/telegram-task-reminder; config.json excluded via .gitignore; config.example.json + README.md added |
 
 ## !! HIGH MATTERS — Update This Section in Future Convos !!
+- Project is now Telegram-based — WhatsApp/Chrome code is gone
+- Repo: https://github.com/dwikikresnadi/telegram-task-reminder
+- `config.json` is NEVER committed — token + ownerId stay local only
 - Popup is `show_popup.js` (Node.js) — do NOT revert to bash version
-- `index.js` cleans Chrome lock files on startup — keep this in place
-- Git push is pending — `.wwebjs_auth/` must never be committed (sensitive session tokens)
 - **Rule:** Every revision, feature, or bug fix must be logged in the Revision Log above AND updated in Claude memory (`project_whatsapp_reminder.md`)
