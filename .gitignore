@@ -1,0 +1,21 @@
+# Sensitive config — copy config.example.json to config.json and fill in your values
+config.json
+
+# macOS
+.DS_Store
+
+# Dependencies — run npm install to restore
+node_modules/
+
+# Runtime data
+tasks.json
+.popup_last_shown
+.last_seen_timestamp
+.popup_tmp.applescript
+
+# Logs
+*.log
+
+# WhatsApp leftovers (no longer used)
+.wwebjs_auth/
+.wwebjs_cache/
