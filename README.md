@@ -113,4 +113,4 @@ launchctl load ~/Library/LaunchAgents/com.user.wamacreminder.popup.plist
 
 - The bot only works while your Mac is on or awake
 - If your Mac was off or sleeping, any commands you sent from your phone are processed automatically when it comes back online
-- `config.json` is excluded from Git — never share your token publicly
+- `config.json` is excluded from Git, do on your own.
